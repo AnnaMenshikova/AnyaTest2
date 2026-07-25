@@ -3,20 +3,14 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ProductsPage {
+public class ProductsPage extends BasePage {
     private final By pageName = By.cssSelector("[data-test='title']");
-    WebDriver driver;
 
     public ProductsPage(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    public boolean pageIsOpen() {
-        return driver.findElement(pageName).isDisplayed();
+        super(driver);
     }
 
     public String getNamePage() {
         return driver.findElement(pageName).getText();
     }
-
 }

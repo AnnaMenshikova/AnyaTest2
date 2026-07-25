@@ -18,11 +18,11 @@ public class BaseTest {
     @BeforeMethod
     public void setup() {
         ChromeOptions options = new ChromeOptions();
+        //options.addArguments("--guest");
         options.addArguments("start-maximized");
         options.addArguments("headless");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(7));
-
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
     }
@@ -31,5 +31,4 @@ public class BaseTest {
     public void close() {
         driver.quit();
     }
-
 }
