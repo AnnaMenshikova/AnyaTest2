@@ -18,7 +18,7 @@ public class BaseTest {
     @BeforeMethod
     public void setup() {
         ChromeOptions options = new ChromeOptions();
-        //options.addArguments("--guest");
+        options.addArguments("--guest");
         options.addArguments("start-maximized");
         options.addArguments("headless");
         driver = new ChromeDriver(options);
