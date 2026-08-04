@@ -2,6 +2,8 @@ package tests;
 
 import org.testng.annotations.Test;
 import java.util.List;
+
+import static enums.TitleNaming.PRODUCTS;
 import static org.testng.Assert.assertEquals;
 import static user.UserFactory.withAdminPermission;
 
@@ -13,8 +15,12 @@ public class ProductsTest extends BaseTest {
 
     @Test
     public void checkGoodsAdded() {
+        System.out.println("ProductsTest.checkGoodsAdded running in thread: "
+                + Thread.currentThread().getName());
         loginPage.open();
         loginPage.login(withAdminPermission());
+        assertEquals(productsPage.getNamePage(), PRODUCTS.getDisplayName(),
+                "Name of the page doesn't correspond to the expected");
         productsPage.pageIsOpen();
         productsPage.addToCart(5);
         for (String goodName : goodsList) {

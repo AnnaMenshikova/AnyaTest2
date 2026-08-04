@@ -4,6 +4,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import user.User;
 import javax.swing.*;
+
+import static enums.TitleNaming.PRODUCTS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static user.UserFactory.withAdminPermission;
@@ -13,11 +15,13 @@ public class LoginTest extends BaseTest {
 
     @Test(description = "Проверка валидной авторизации", priority = 1)
     public void validLogin() {
+        System.out.println("LoginTest.validLogin running in thread: "
+                + Thread.currentThread().getName());
         loginPage.open();
         loginPage.login(withAdminPermission());
 
         assertTrue(productsPage.pageIsOpen());
-        assertEquals(productsPage.getNamePage(), "Products",
+        assertEquals(productsPage.getNamePage(), PRODUCTS.getDisplayName(),
                 "Name of the page doesn't correspond to the expected");
     }
 
@@ -33,8 +37,10 @@ public class LoginTest extends BaseTest {
         };
     }
 
-    @Test(priority = 2, invocationCount = 1, dataProvider = "loginData")
+    @Test(priority = 2, dataProvider = "loginData")
     public void invalidLogin(User user, String errorMsg) {
+        System.out.println("LoginTest.invalidLogin running in thread: "
+                + Thread.currentThread().getName());
             loginPage.open();
             loginPage.login(user);
             assertTrue(loginPage.isErrorDisplayed());
