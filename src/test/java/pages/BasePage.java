@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,10 +21,12 @@ public class BasePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
+    @Step("Проверяем отображение страницы")
     public boolean pageIsOpen() {
         return driver.findElement(pageName).isDisplayed();
     }
 
+    @Step("Получаем название страницы")
     public String getNamePage() {
         return driver.findElement(pageName).getText();
     }

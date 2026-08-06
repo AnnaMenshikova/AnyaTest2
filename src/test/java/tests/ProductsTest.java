@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import java.util.List;
 
@@ -7,13 +8,20 @@ import static enums.TitleNaming.PRODUCTS;
 import static org.testng.Assert.assertEquals;
 import static user.UserFactory.withAdminPermission;
 
+@Epic("Интернет-магазин")
+@Feature("Товары")
+@Owner("Menshikova Anna anna@list.ru")
 public class ProductsTest extends BaseTest {
     List<String> goodsList =
             List.of("Sauce Labs Bolt T-Shirt",
                     "Sauce Labs Bike Light",
                     "Sauce Labs Fleece Jacket");
 
+    @Story("Добавление товаров в корзину")
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @TmsLink("AnyaTest2")
+    @Description("Проверка возможности добавить товар в корзину")
     public void checkGoodsAdded() {
         System.out.println("ProductsTest.checkGoodsAdded running in thread: "
                 + Thread.currentThread().getName());

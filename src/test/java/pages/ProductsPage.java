@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,23 +17,28 @@ public class ProductsPage extends BasePage {
         super(driver);
     }
 
+    @Step("Добавляем товар 'goodsName' в корзину")
     public void addToCart(final String goodsName) {
         By goods = By.xpath(ADD_TO_CART.formatted(goodsName));
         driver.findElement(goods).click();
     }
 
+    @Step("Добавляем товар с индексом 'goodsIndex' в корзину")
     public void addToCart(int goodsIndex) {
         driver.findElements(addToCartBnt).get(goodsIndex).click();
     }
 
+    @Step("Получаем значение счетчика в корзине")
     public int checkCounterValue() {
         return Integer.parseInt(driver.findElement(counter).getText());
     }
 
+    @Step("Получаем цвет фона счетчика в корзине")
     public String checkCounterColor() {
         return driver.findElement(counter).getCssValue("background-color");
     }
 
+    @Step("Переход на страницу корзины")
     public void switchToCart() {
         driver.findElement(cartLink).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(pageName));
