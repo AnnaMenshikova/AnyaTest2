@@ -17,15 +17,19 @@ public class ProductsPage extends BasePage {
         super(driver);
     }
 
-    @Step("Добавляем товар 'goodsName' в корзину")
-    public void addToCart(final String goodsName) {
+    @Step("Добавляем товар '{goodsName}' в корзину")
+    public ProductsPage addToCart(final String goodsName) {
         By goods = By.xpath(ADD_TO_CART.formatted(goodsName));
         driver.findElement(goods).click();
+
+        return this;
     }
 
-    @Step("Добавляем товар с индексом 'goodsIndex' в корзину")
-    public void addToCart(int goodsIndex) {
+    @Step("Добавляем товар с индексом '{goodsIndex}' в корзину")
+    public ProductsPage addToCart(int goodsIndex) {
         driver.findElements(addToCartBnt).get(goodsIndex).click();
+
+        return this;
     }
 
     @Step("Получаем значение счетчика в корзине")

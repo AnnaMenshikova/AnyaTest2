@@ -26,7 +26,8 @@ public class LoginTest extends BaseTest {
     public void validLogin() {
         System.out.println("LoginTest.validLogin running in thread: "
                 + Thread.currentThread().getName());
-        loginPage.open();
+        loginPage
+                .open();
         loginPage.login(withAdminPermission());
 
         assertTrue(productsPage.pageIsOpen());
@@ -54,7 +55,8 @@ public class LoginTest extends BaseTest {
     public void invalidLogin(User user, String errorMsg) {
         System.out.println("LoginTest.invalidLogin running in thread: "
                 + Thread.currentThread().getName());
-        loginPage.open();
+        loginPage
+                .open();
         loginPage.login(user);
         assertTrue(loginPage.isErrorDisplayed());
         assertEquals(loginPage.getErrorMessage(), errorMsg);
