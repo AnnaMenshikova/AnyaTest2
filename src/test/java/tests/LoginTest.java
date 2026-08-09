@@ -1,7 +1,9 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.ProductsPage;
 import user.User;
 import javax.swing.*;
 
@@ -11,14 +13,24 @@ import static org.testng.Assert.assertTrue;
 import static user.UserFactory.withAdminPermission;
 import static user.UserFactory.withLockedAdminPermission;
 
+@Epic("Интернет-магазин")
+@Feature("Авторизация")
+@Owner("Menshikova Anna anna@list.ru")
 public class LoginTest extends BaseTest {
 
-    @Test(description = "Проверка валидной авторизации", priority = 1)
+    @Story("Удачная авторизация")
+    @Test(priority = 1)
+    @Severity(SeverityLevel.BLOCKER)
+    @TmsLink("AnyaTest2")
+    @Issue("AnyaTest")
+    @Description("Проверка корректной авторизации")
     public void validLogin() {
         System.out.println("LoginTest.validLogin running in thread: "
                 + Thread.currentThread().getName());
-        loginPage.open();
-        loginPage.login(withAdminPermission());
+
+        ProductsPage productsPage = loginPage
+                .open()
+                .login(withAdminPermission());
 
         assertTrue(productsPage.pageIsOpen());
         assertEquals(productsPage.getNamePage(), PRODUCTS.getDisplayName(),
@@ -37,13 +49,19 @@ public class LoginTest extends BaseTest {
         };
     }
 
+    @Story("Неудачная авторизация")
     @Test(priority = 2, dataProvider = "loginData")
+    @Severity(SeverityLevel.BLOCKER)
+    @TmsLink("AnyaTest2")
+    @Description("Проверка некорректной авторизации")
     public void invalidLogin(User user, String errorMsg) {
         System.out.println("LoginTest.invalidLogin running in thread: "
                 + Thread.currentThread().getName());
-            loginPage.open();
-            loginPage.login(user);
-            assertTrue(loginPage.isErrorDisplayed());
-            assertEquals(loginPage.getErrorMessage(), errorMsg);
-        }
+        loginPage
+                .open()
+                .loginInvalid(user);
+
+        assertTrue(loginPage.isErrorDisplayed());
+        assertEquals(loginPage.getErrorMessage(), errorMsg);
     }
+}

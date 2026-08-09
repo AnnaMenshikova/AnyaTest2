@@ -1,23 +1,14 @@
 package enums;
 
-public enum TitleNaming {
-    PRODUCTS("Products", "prod"),
-    CART("Your Cart", "cart"),
-    CHECKOUT("Checkout: Your Information", "checkout");
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-    TitleNaming(String displayName, String shortName) {
-        this.displayName = displayName;
-        this.shortName = shortName;
-    }
+@AllArgsConstructor
+@Getter
+public enum TitleNaming {
+    PRODUCTS("Products"),
+    CART("Your Cart" ),
+    CHECKOUT("Checkout: Your Information");
 
     private final String displayName;
-    private final String shortName;
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
 }
