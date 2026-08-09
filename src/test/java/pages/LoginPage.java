@@ -23,10 +23,12 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Логинимся под кредами: {user.login}, пароль {user.password}")
-    public void login(User user) {
+    public LoginPage login(User user) {
         driver.findElement(loginInput).sendKeys(user.getLogin());
         driver.findElement(passwordInput).sendKeys(user.getPassword());
         driver.findElement(loginBtn).click();
+
+        return this;
     }
 
     @Step("Проверяем сообщается ли сообщение об ошибке")

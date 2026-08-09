@@ -27,8 +27,8 @@ public class LoginTest extends BaseTest {
         System.out.println("LoginTest.validLogin running in thread: "
                 + Thread.currentThread().getName());
         loginPage
-                .open();
-        loginPage.login(withAdminPermission());
+                .open()
+                .login(withAdminPermission());
 
         assertTrue(productsPage.pageIsOpen());
         assertEquals(productsPage.getNamePage(), PRODUCTS.getDisplayName(),
@@ -56,8 +56,8 @@ public class LoginTest extends BaseTest {
         System.out.println("LoginTest.invalidLogin running in thread: "
                 + Thread.currentThread().getName());
         loginPage
-                .open();
-        loginPage.login(user);
+                .open()
+                .login(user);
         assertTrue(loginPage.isErrorDisplayed());
         assertEquals(loginPage.getErrorMessage(), errorMsg);
     }
