@@ -2,10 +2,13 @@ package tests;
 
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
+import pages.ProductsPage;
+
 import java.util.List;
 
 import static enums.TitleNaming.PRODUCTS;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 import static user.UserFactory.withAdminPermission;
 
 @Epic("Интернет-магазин")
@@ -25,15 +28,21 @@ public class ProductsTest extends BaseTest {
     public void checkGoodsAdded() {
         System.out.println("ProductsTest.checkGoodsAdded running in thread: "
                 + Thread.currentThread().getName());
-        loginPage.open();
-        loginPage.login(withAdminPermission());
+
+        ProductsPage productsPage = loginPage
+                .open()
+                .login(withAdminPermission());
+
         assertEquals(productsPage.getNamePage(), PRODUCTS.getDisplayName(),
                 "Name of the page doesn't correspond to the expected");
-        productsPage.pageIsOpen();
+        assertTrue(productsPage.pageIsOpen());
+
         productsPage.addToCart(5);
+
         for (String goodName : goodsList) {
             productsPage.addToCart(goodName);
         }
+
         assertEquals(productsPage.checkCounterValue(), 4);
         assertEquals(productsPage.checkCounterColor(), "rgba(226, 35, 26, 1)");
     }

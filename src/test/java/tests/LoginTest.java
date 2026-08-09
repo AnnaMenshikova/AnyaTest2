@@ -3,6 +3,7 @@ package tests;
 import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.ProductsPage;
 import user.User;
 import javax.swing.*;
 
@@ -26,7 +27,8 @@ public class LoginTest extends BaseTest {
     public void validLogin() {
         System.out.println("LoginTest.validLogin running in thread: "
                 + Thread.currentThread().getName());
-        loginPage
+
+        ProductsPage productsPage = loginPage
                 .open()
                 .login(withAdminPermission());
 
@@ -57,7 +59,8 @@ public class LoginTest extends BaseTest {
                 + Thread.currentThread().getName());
         loginPage
                 .open()
-                .login(user);
+                .loginInvalid(user);
+
         assertTrue(loginPage.isErrorDisplayed());
         assertEquals(loginPage.getErrorMessage(), errorMsg);
     }

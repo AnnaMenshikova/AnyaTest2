@@ -23,7 +23,16 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Логинимся под кредами: {user.login}, пароль {user.password}")
-    public LoginPage login(User user) {
+    public ProductsPage login(User user) {
+        driver.findElement(loginInput).sendKeys(user.getLogin());
+        driver.findElement(passwordInput).sendKeys(user.getPassword());
+        driver.findElement(loginBtn).click();
+
+        return new ProductsPage(driver);
+    }
+
+    @Step("Логинимся под невалидными кредами: {user.login}, пароль {user.password}")
+    public LoginPage loginInvalid(User user) {
         driver.findElement(loginInput).sendKeys(user.getLogin());
         driver.findElement(passwordInput).sendKeys(user.getPassword());
         driver.findElement(loginBtn).click();

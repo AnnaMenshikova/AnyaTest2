@@ -2,6 +2,9 @@ package tests;
 
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
+import pages.CartPage;
+import pages.ProductsPage;
+
 import java.util.List;
 
 import static enums.TitleNaming.CART;
@@ -26,14 +29,21 @@ public class CartTest extends BaseTest {
     public void checkGoodsAdded() {
         System.out.println("CartTest.checkGoodsAdded running in thread: "
                 + Thread.currentThread().getName());
-        loginPage.open();
-        loginPage.login(withAdminPermission());
+
+        ProductsPage productsPage = loginPage
+                .open()
+                .login(withAdminPermission());
+
         assertEquals(productsPage.getNamePage(), PRODUCTS.getDisplayName(),
                 "Name of the page doesn't correspond to the expected");
+
         for (String goodName : goodsList) {
-            productsPage.addToCart(goodName);
+            productsPage
+                    .addToCart(goodName);
         }
-        productsPage.switchToCart();
+
+        CartPage cartPage = productsPage.switchToCart();
+
         assertEquals(productsPage.getNamePage(), CART.getDisplayName(),
                 "Name of the page doesn't correspond to the expected");
         assertFalse(cartPage.getProductsName().isEmpty());

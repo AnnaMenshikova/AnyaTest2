@@ -43,8 +43,10 @@ public class ProductsPage extends BasePage {
     }
 
     @Step("Переход на страницу корзины")
-    public void switchToCart() {
+    public CartPage switchToCart() {
         driver.findElement(cartLink).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(pageName));
+
+        return new CartPage(driver);
     }
 }
