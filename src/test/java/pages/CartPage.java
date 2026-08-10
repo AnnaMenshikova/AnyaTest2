@@ -11,6 +11,8 @@ import java.util.List;
 
 public class CartPage extends BasePage {
     private final By productName = By.cssSelector(".inventory_item_name");
+    private final By checkoutBtn = By.cssSelector(DATA_TEST_PATTERN.formatted("checkout"));
+    private final By continueShoppingBtn = By.cssSelector(DATA_TEST_PATTERN.formatted("continue-shopping"));
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -25,5 +27,21 @@ public class CartPage extends BasePage {
             names.add(productBlock.getText());
         }
         return names;
+    }
+
+    @Step("Переход на страницу информации о пользователе")
+    public CheckoutPage switchToCheckout() {
+        driver.findElement(checkoutBtn).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(pageName));
+
+        return new CheckoutPage(driver);
+    }
+
+    @Step("Возврат к странице товаров")
+    public ProductsPage continueShopping() {
+        driver.findElement(continueShoppingBtn).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(pageName));
+
+        return new ProductsPage(driver);
     }
 }
