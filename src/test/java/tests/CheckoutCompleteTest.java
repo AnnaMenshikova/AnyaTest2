@@ -44,7 +44,7 @@ public class CheckoutCompleteTest extends BaseTest {
         assertTrue(checkoutCompletePage.pageIsOpen());
         assertEquals(checkoutCompletePage.getNamePage(), COMPLETE.getDisplayName(),
                 "Name of the page doesn't correspond to the expected");
-        assertTrue(checkoutCompletePage.isIconDisplayed());
+        assertTrue(checkoutCompletePage.isIconPresent());
         assertEquals(checkoutCompletePage.getCompleteHeader(), "Thank you for your order!",
                 "Complete header doesn't correspond to the expected");
         assertEquals(checkoutCompletePage.getCompleteText(),

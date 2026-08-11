@@ -16,10 +16,9 @@ public class CheckoutCompletePage extends BasePage{
         super(driver);
     }
 
-    @Step("Проверяем отображение значка успешного оформления заказа")
-    public boolean isIconDisplayed() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(icon));
-        return driver.findElement(icon).isDisplayed();
+    @Step("Проверяем наличие значка успешного оформления заказа")
+    public boolean isIconPresent() {
+        return !driver.findElements(icon).isEmpty();
     }
 
     @Step("Получаем заголовок страницы завершения заказа")

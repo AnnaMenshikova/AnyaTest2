@@ -17,18 +17,21 @@ public class CheckoutOverviewPage extends BasePage {
     }
 
     @Step("Получаем сумму товаров")
-    public String getItemTotal() {
-        return driver.findElement(itemTotal).getText();
+    public double getItemTotal() {
+        String text = driver.findElement(itemTotal).getText();
+        return Double.parseDouble(text.split("\\$")[1]);
     }
 
     @Step("Получаем сумму налога")
-    public String getTax() {
-        return driver.findElement(tax).getText();
+    public double getTax() {
+        String text = driver.findElement(tax).getText();
+        return Double.parseDouble(text.split("\\$")[1]);
     }
 
     @Step("Получаем итоговую сумму заказа")
-    public String getTotal() {
-        return driver.findElement(total).getText();
+    public double getTotal() {
+        String text = driver.findElement(total).getText();
+        return Double.parseDouble(text.split("\\$")[1]);
     }
 
     @Step("Завершаем оформление заказа")

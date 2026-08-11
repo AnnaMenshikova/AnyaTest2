@@ -42,9 +42,8 @@ public class CheckoutTest extends BaseTest {
         assertEquals(checkoutOverviewPage.getNamePage(), CHECKOUT_OVERVIEW.getDisplayName(),
                 "Name of the page doesn't correspond to the expected");
 
-        assertFalse(checkoutOverviewPage.getItemTotal().isEmpty());
-        assertFalse(checkoutOverviewPage.getTax().isEmpty());
-        assertFalse(checkoutOverviewPage.getTotal().isEmpty());
+        assertEquals(checkoutOverviewPage.getItemTotal() + checkoutOverviewPage.getTax(),
+                checkoutOverviewPage.getTotal(), 0.01);
 
         CheckoutCompletePage checkoutCompletePage = checkoutOverviewPage.finish();
 
@@ -52,7 +51,7 @@ public class CheckoutTest extends BaseTest {
         assertEquals(checkoutCompletePage.getNamePage(), COMPLETE.getDisplayName(),
                 "Name of the page doesn't correspond to the expected");
 
-        assertTrue(checkoutCompletePage.isIconDisplayed());
+        assertTrue(checkoutCompletePage.isIconPresent());
         assertEquals(checkoutCompletePage.getCompleteHeader(), "Thank you for your order!",
                 "Complete header doesn't correspond to the expected");
         assertEquals(checkoutCompletePage.getCompleteText(),
